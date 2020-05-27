@@ -28,6 +28,7 @@
 		<spring-test-mongo.version>0.13</spring-test-mongo.version>
 		<spring-test-mysql.version>0.2</spring-test-mysql.version>
 		<spring-test-postgresql.version>0.2</spring-test-postgresql.version>
+		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
 
 		<junit.version> 5.6.2</junit.version>
 		<hamcrest.version>2.1</hamcrest.version>
@@ -42,6 +43,8 @@
 		<lombok.version>1.18.12</lombok.version>
 		<jackson.version>2.10.3</jackson.version>
 		<json-path.version>2.4.0</json-path.version>
+		<jsoup.version>1.13.1</jsoup.version>
+
 		<mongo-driver.version>3.11.2</mongo-driver.version>
 		<hikari.version>3.4.2</hikari.version>
 		<mysql-driver.version>8.0.20</mysql-driver.version>
