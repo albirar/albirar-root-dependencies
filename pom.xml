@@ -33,6 +33,9 @@
 		<junit.version> 5.6.2</junit.version>
 		<hamcrest.version>2.1</hamcrest.version>
 		<mockito.version>3.1.0</mockito.version>
+		<greenmail.version>1.5.13</greenmail.version>
+		<json-path.version>2.4.0</json-path.version>
+		<jsoup.version>1.13.1</jsoup.version>
 
 		<logback.version>1.2.3</logback.version>
 		<slf4j.version>1.7.25</slf4j.version>
@@ -42,13 +45,13 @@
 		<hibernate-validator.version>6.0.18.Final</hibernate-validator.version>
 		<lombok.version>1.18.12</lombok.version>
 		<jackson.version>2.10.3</jackson.version>
-		<json-path.version>2.4.0</json-path.version>
-		<jsoup.version>1.13.1</jsoup.version>
 
 		<mongo-driver.version>3.11.2</mongo-driver.version>
 		<hikari.version>3.4.2</hikari.version>
 		<mysql-driver.version>8.0.20</mysql-driver.version>
 		<postgresql-driver.version>42.2.12</postgresql-driver.version>
+
+		<twilio.version>7.50.1</twilio.version>
 
 	</properties>
 
@@ -59,7 +62,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
-			<optional>true</optional>
 		</dependency>
 
 		<!-- LOG -->
