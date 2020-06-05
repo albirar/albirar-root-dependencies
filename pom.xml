@@ -29,6 +29,11 @@
 		<spring-test-postgresql.version>0.2</spring-test-postgresql.version>
 		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
 		<spring.version>5.2.6.RELEASE</spring.version>
+		<spring-amqp.version>2.2.7.RELEASE</spring-amqp.version>
+		
+		<apache-qpid.version>8.0.0</apache-qpid.version>
+		
+		<jakarta-mail.version>1.6.5</jakarta-mail.version>
 
 		<logback.version>1.2.3</logback.version>
 		<slf4j.version>1.7.25</slf4j.version>
@@ -54,7 +59,6 @@
 		<jsoup.version>1.13.1</jsoup.version>
 		<mockito.version>3.1.0</mockito.version>
 
-		<twilio.version>7.50.1</twilio.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
