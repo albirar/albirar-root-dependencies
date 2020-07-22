@@ -30,6 +30,9 @@
 		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
 		<spring.version>5.2.6.RELEASE</spring.version>
 		<spring-amqp.version>2.2.7.RELEASE</spring-amqp.version>
+		<spring-webflux.version>2.3.1.RELEASE</spring-webflux.version>
+		
+		<reactor-spring.version>1.0.1.RELEASE</reactor-spring.version>
 		
 		<apache-qpid.version>8.0.0</apache-qpid.version>
 		
