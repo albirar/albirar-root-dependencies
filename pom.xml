@@ -33,7 +33,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
-		<spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
 		<spring-data-mongodb.version>2.2.7.RELEASE</spring-data-mongodb.version>
 		<spring-data.version>2.3.0.RELEASE</spring-data.version>
 		<spring-restdocs.version>2.0.4.RELEASE</spring-restdocs.version>
@@ -43,7 +43,7 @@
 		<spring-test-mysql.version>0.2</spring-test-mysql.version>
 		<spring-test-postgresql.version>0.2</spring-test-postgresql.version>
 		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
-		<spring.version>5.2.6.RELEASE</spring.version>
+		<spring.version>5.2.12.RELEASE</spring.version>
 		<spring-amqp.version>2.2.7.RELEASE</spring-amqp.version>
 		<spring-webflux.version>2.3.1.RELEASE</spring-webflux.version>
 
@@ -79,6 +79,7 @@
 		<mockito.version>3.1.0</mockito.version>
 		<mockserver.version>5.11.1</mockserver.version>
 		<awaitility.version>4.0.3</awaitility.version>
+		<cobertura.version>2.7</cobertura.version>
 
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
@@ -303,6 +304,11 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.2.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>3.0.0-M4</version>
 					<configuration>
@@ -311,11 +317,41 @@
 					</configuration>
 				</plugin>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>3.0.0-M5</version>
+					<configuration>
+						<aggregate>true</aggregate>
+					</configuration>
+				</plugin>
+				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<version>${spring-boot.version}</version>
 				</plugin>
-
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>${cobertura.version}</version>
+					<executions>
+						<execution>
+							<id>site-cobertura</id>
+							<phase>pre-site</phase>
+							<goals>
+								<goal>cobertura</goal>
+							</goals>
+							<inherited>true</inherited>
+						</execution>
+					</executions>
+					<configuration>
+						<instrumentation>
+							<excludes>
+								<exclude>**/models/*.class</exclude>
+								<exclude>**/I*.class</exclude>
+							</excludes>
+						</instrumentation>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
@@ -376,6 +412,41 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>${cobertura.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>cobertura</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<distributionManagement>
 		<snapshotRepository>
