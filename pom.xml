@@ -395,7 +395,6 @@
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<releaseProfiles>release</releaseProfiles>
-						
 						<localCheckout>true</localCheckout>
 						<pushChanges>false</pushChanges>
 						<mavenExecutorId>forked-path</mavenExecutorId>
@@ -475,7 +474,7 @@
 							<executions>
 								<execution>
 									<id>default-deploy</id>
-									<phase>release</phase>
+									<phase>deploy</phase>
 									<goals>
 										<goal>deploy</goal>
 									</goals>
