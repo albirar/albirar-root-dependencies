@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>albirar-root-dependencies</name>
 	<description>The common properties for dependencies on all albirar projects</description>
@@ -384,23 +384,22 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>2.8.2</version>
-					<executions>
-						<execution>
-							<id>default-deploy</id>
-							<phase>deploy</phase>
-							<goals>
-								<goal>deploy</goal>
-							</goals>
-						</execution>
-					</executions>
+					<configuration>
+						<!-- Use nexus instead -->
+						<skip>true</skip>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.3</version>
 					<configuration>
-						<localCheckout>true</localCheckout>
-						<pushChanges>false</pushChanges>
+						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<releaseProfiles>release</releaseProfiles>
+						
+<!-- 						<localCheckout>true</localCheckout> -->
+<!-- 						<pushChanges>false</pushChanges> -->
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
 					</configuration>
@@ -411,17 +410,6 @@
 							<version>1.9.5</version>
 						</dependency>
 					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>org.sonatype.plugins</groupId>
-					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>1.6.8</version>
-					<extensions>true</extensions>
-					<configuration>
-						<serverId>ossrh</serverId>
-						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-						<autoReleaseAfterClose>true</autoReleaseAfterClose>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -470,4 +458,35 @@
 		</repository>
 	</distributionManagement>
 
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.sonatype.plugins</groupId>
+							<artifactId>nexus-staging-maven-plugin</artifactId>
+							<version>1.6.8</version>
+							<extensions>true</extensions>
+							<configuration>
+								<serverId>ossrh</serverId>
+								<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+								<skipStaging>true</skipStaging>
+							</configuration>
+							<executions>
+								<execution>
+									<id>default-deploy</id>
+									<phase>deploy</phase>
+									<goals>
+										<goal>deploy</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
 </project>
