@@ -24,6 +24,12 @@
 		<url>https://github.com/albirar/albirar-root-dependencies</url>
 	</scm>
 
+	<developers>
+		<developer>
+			<name>Octavi Fornés</name>
+			<email>ofornes@albirar.cat</email>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
