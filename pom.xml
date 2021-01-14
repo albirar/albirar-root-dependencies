@@ -475,7 +475,7 @@
 							<executions>
 								<execution>
 									<id>default-deploy</id>
-									<phase>deploy</phase>
+									<phase>release</phase>
 									<goals>
 										<goal>deploy</goal>
 									</goals>
