@@ -396,8 +396,8 @@
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<releaseProfiles>release</releaseProfiles>
 						
-<!-- 						<localCheckout>true</localCheckout> -->
-<!-- 						<pushChanges>false</pushChanges> -->
+						<localCheckout>true</localCheckout>
+						<pushChanges>false</pushChanges>
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
 					</configuration>
