@@ -371,7 +371,7 @@
 					<executions>
 						<execution>
 							<id>sign-artifacts</id>
-							<phase>verify</phase>
+							<phase>deploy</phase>
 							<goals>
 								<goal>sign</goal>
 							</goals>
@@ -482,6 +482,7 @@
 								<serverId>ossrh</serverId>
 								<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 								<skipStaging>true</skipStaging>
+								<stagingProfileId>${nexus.profileid}</stagingProfileId>
 							</configuration>
 							<executions>
 								<execution>
