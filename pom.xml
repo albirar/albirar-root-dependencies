@@ -397,15 +397,6 @@
 						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 						<skipStaging>true</skipStaging>
 					</configuration>
-					<executions>
-						<execution>
-							<id>default-deploy</id>
-							<phase>deploy</phase>
-							<goals>
-								<goal>deploy</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -414,7 +405,8 @@
 					<configuration>
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<releaseProfiles>release</releaseProfiles>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfiles>nexus</releaseProfiles>
 						<localCheckout>true</localCheckout>
 						<pushChanges>false</pushChanges>
 						<mavenExecutorId>forked-path</mavenExecutorId>
@@ -477,7 +469,7 @@
 
 	<profiles>
 		<profile>
-			<id>release</id>
+			<id>nexus</id>
 			<build>
 				<pluginManagement>
 					<plugins>
