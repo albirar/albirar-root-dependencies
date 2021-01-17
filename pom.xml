@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.0.6</version>
+	<version>2.0.7</version>
 	<packaging>pom</packaging>
 	<name>albirar-root-dependencies</name>
 	<description>The common properties for dependencies on all albirar projects</description>
@@ -18,7 +18,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/albirar/albirar-root-dependencies.git</connection>
-		<tag>v2.0.6</tag>
+		<tag>HEAD</tag>
 		<url>https://github.com/albirar/albirar-root-dependencies</url>
 	</scm>
 
@@ -87,6 +87,8 @@
 
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
+
+		<jgitflow-plugin.version>1.0-m5.1</jgitflow-plugin.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -373,37 +375,21 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.sonatype.plugins</groupId>
-					<artifactId>nexus-staging-maven-plugin</artifactId>
-					<version>1.6.8</version>
-					<extensions>true</extensions>
+					<groupId>external.atlassian.jgitflow</groupId>
+					<artifactId>jgitflow-maven-plugin</artifactId>
+					<version>${jgitflow-plugin.version}</version>
 					<configuration>
-						<serverId>ossrh</serverId>
-						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-						<skipStaging>true</skipStaging>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.5.3</version>
-					<configuration>
-						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<allowSnapshots>true</allowSnapshots>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<useReleaseProfile>false</useReleaseProfile>
-						<releaseProfiles>nexus</releaseProfiles>
-						<localCheckout>true</localCheckout>
-						<pushChanges>false</pushChanges>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-						<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+						<flowInitContext>
+							<masterBranchName>master</masterBranchName>
+							<developBranchName>develop</developBranchName>
+							<featureBranchPrefix>feature/</featureBranchPrefix>
+							<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+							<releaseBranchPrefix>release/</releaseBranchPrefix>
+							<versionTagPrefix>v</versionTagPrefix>
+						</flowInitContext>
 					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.apache.maven.scm</groupId>
-							<artifactId>maven-scm-provider-gitexe</artifactId>
-							<version>1.9.5</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -459,6 +445,20 @@
 				<pluginManagement>
 					<plugins>
 						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-gpg-plugin</artifactId>
+							<version>1.6</version>
+							<executions>
+								<execution>
+									<id>sign-artifacts</id>
+									<phase>deploy</phase>
+									<goals>
+										<goal>sign</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
 							<groupId>org.sonatype.plugins</groupId>
 							<artifactId>nexus-staging-maven-plugin</artifactId>
 							<version>1.6.8</version>
@@ -479,22 +479,18 @@
 								</execution>
 							</executions>
 						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-gpg-plugin</artifactId>
-							<version>1.6</version>
-							<executions>
-								<execution>
-									<id>sign-artifacts</id>
-									<phase>verify</phase>
-									<goals>
-										<goal>sign</goal>
-									</goals>
-								</execution>
-							</executions>
-						</plugin>
 					</plugins>
 				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
