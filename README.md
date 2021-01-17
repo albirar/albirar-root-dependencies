@@ -1,5 +1,5 @@
 # albirar-root-dependencies
-The root properties, dependencies and builds for all projects
+The root properties, dependencies and builds for all projects.
 
 ## Workflow and Git
 
@@ -54,3 +54,58 @@ mvn -P nexus clean install deploy
 ```
 
 No further goals of nexus plugin should to be called, because the SNAPSHOT process doesn't need to close or release.
+
+### Deploying Release
+
+The deploying release has some validations at nexus, so no invalid projects are released to MAVEN central.
+
+The steps to release are:
+
+* Deploy to nexus (staging)
+* Close the staged repository
+* Release the closed repository (if all validations are ok)
+
+After a while (can be 24 hours) the new artifact will be at Maven Central.
+
+Goals to release:
+
+**Deploy**
+
+
+```bash
+mvn -P nexus clean install deploy
+```
+
+**Get the staging repository ID**
+
+```bash
+mvn -P nexus nexus-staging:rc-list
+```
+
+The new stagged repository should to be show, we need the repository ID, the code that appears at first column.
+
+**Try to close**
+
+The process to close the repository make all the validation needed to pass verification rules. If validation isn't pass, the repository remains open.
+
+```bash
+mvn -P nexus nexus-staging:rc-close -DstagingRepositoryId=repoId
+```
+
+Where `repoId` is the repository id listed before.
+
+If the process ends successfully, the deploying is validated and can be released.
+
+If the process ends with error, the message show the problem to be corrected. Correct it and try to close another time.
+
+**Release the artifact**
+
+Once the repository was successfully closed, the artifact can be released:
+
+```bash
+mvn -P nexus nexus-staging:release -DstagingRepositoryId=repoId
+```
+
+Where `repoId` is the repository id to release.
+
+If all is OK, the new version of artifact is published at sonatype repositories and, after a while, they be appear on Maven Central.
