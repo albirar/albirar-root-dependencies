@@ -468,6 +468,7 @@
 								<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 								<skipStaging>true</skipStaging>
 								<stagingProfileId>${nexus.profileid}</stagingProfileId>
+								<autoReleaseAfterClose>true</autoReleaseAfterClose>
 							</configuration>
 							<executions>
 								<execution>
@@ -489,6 +490,9 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<configuration>
+							<skipRemoteStaging>true</skipRemoteStaging>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
