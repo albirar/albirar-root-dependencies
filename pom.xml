@@ -490,9 +490,6 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<configuration>
-							<skipRemoteStaging>true</skipRemoteStaging>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
