@@ -110,8 +110,13 @@ Where `repoId` is the repository id to release.
 
 If all is OK, the new version of artifact is published at sonatype repositories and, after a while, they be appear on Maven Central.
 
-## Documentation as a MAVEN site
+## Documenting project
 
 Any project that should to publish documentation, should to use the Maven site plugin.
 
-The site will be published at github pages, with a special branch named 
+The site will be published with github pages, so as site is for project, the site is published at branch `gh-pages`.
+
+
+
+
+
