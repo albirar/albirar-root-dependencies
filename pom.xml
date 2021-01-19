@@ -416,6 +416,7 @@
 					<artifactId>jgitflow-maven-plugin</artifactId>
 					<version>${jgitflow-plugin.version}</version>
 					<configuration>
+						<enableSshAgent>true</enableSshAgent>
 						<allowSnapshots>true</allowSnapshots>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<flowInitContext>
