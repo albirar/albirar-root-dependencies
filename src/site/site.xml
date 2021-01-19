@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+	name="Albirar Root Dependencies">
+	<publishDate position="bottom" format="dd-MM-yyy" />
+	<version position="bottom" />
+	<skin>
+		<groupId>org.joda.external</groupId>
+		<artifactId>reflow-maven-skin</artifactId>
+		<version>1.2</version>
+	</skin>
+
+	<custom>
+		<reflowSkin>
+			<!-- Reflow configuration -->
+			<theme>bootswatch-spruce</theme>
+			<highlightJs>true</highlightJs>
+			<skinAttribution>false</skinAttribution>
+			<brand>
+				<name>Albirar Root Dependencies</name>
+				<href>index.html</href>
+			</brand>
+			<topNav>Documentation|Info and Reports</topNav>
+			<bottomNav>
+				<column>Code</column>
+				<column>Releases</column>
+				<column>Icons</column>
+			</bottomNav>
+			<bottomDescription><![CDATA[
+        Common dependencies and configuration for all Albirar projects
+      ]]></bottomDescription>
+			<toc>false</toc>
+			<breadcrumbs>false</breadcrumbs>
+			<markPageHeader>false</markPageHeader>
+			<protocolRelativeURLs>true</protocolRelativeURLs>
+			<pages>
+				<index>
+					<sections>
+						<columns>2</columns>
+						<body />
+						<sidebar />
+					</sections>
+					<shortTitle>Home</shortTitle>
+					<highlightJs>true</highlightJs>
+				</index>
+				<git_flow>
+					<sections>
+						<columns>1</columns>
+						<body />
+						<sidebar />
+					</sections>
+					<shortTitle>Git Flow</shortTitle>
+					<highlightJs>true</highlightJs>
+				</git_flow>
+				<nexus>
+					<sections>
+						<columns>1</columns>
+						<body />
+						<sidebar />
+					</sections>
+					<shortTitle>Maven Central Publish</shortTitle>
+					<highlightJs>true</highlightJs>
+				</nexus>
+				<documentation>
+					<sections>
+						<columns>1</columns>
+						<body />
+						<sidebar />
+					</sections>
+					<shortTitle>Project site generation</shortTitle>
+					<highlightJs>true</highlightJs>
+				</documentation>
+			</pages>
+		</reflowSkin>
+	</custom>
+
+	<body>
+		<head>
+			<![CDATA[<link rel="icon" type="image/png" href="img/logo-albirar-icon.png"></link>]]>
+		</head>
+		<menu name="Documentation" alt="Documentation" title="Documentation">
+			<item name="Git flow" href="git_flow.html" />
+			<item name="Maven Central (through nexus)" href="nexus.html" />
+			<item name="Project documentation" href="documentation.html" />
+		</menu>
+		<menu name="Info and Reports" inherit="top" alt="Info and Reports" title="Info and Reports">
+			<item name="Info" href="project-info.html" />
+			<item name="Reports" href="project-reports.html" />
+			<item name="JavaDocs" href="apidocs/" />
+		</menu>
+		<menu name="Code" inherit="top" alt="Code" title="Code">
+			<item name="SCM" href="${project.scm.url}" alt="SCM" title="SCM" img="images/GitHub-Mark-32px.png">
+				<description>GitHub</description>
+			</item>
+			<item name="CI" href="${project.ciManagement.url}" alt="CI management" title="CI management">
+				<description>${project.ciManagement.system}</description>
+			</item>
+			<item name="Issues" href="${project.issueManagement.url}" alt="Issue management" title="Issue management">
+				<description>${project.issueManagement.system}</description>
+			</item>
+		</menu>
+		<menu name="Releases" inherit="top" alt="Releases" title="Releases">
+			<item name="Maven Central" alt="Maven Central" title="Maven Central"
+				href="https://search.maven.org/artifact/${project.groupId}/${project.artifactId}" />
+		</menu>
+		<menu name="Icons" inherit="top" alt="Icons" title="Icons">
+			<item name="Github" alt="Github" title="Github" img="images/GitHub-Mark-32px.png" href="${project.scm.url}" />
+		</menu>
+	</body>
+</project>
