@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 	<name>albirar-root-dependencies</name>
 	<description>The common properties for dependencies on all albirar projects</description>
-	<url>https://github.com/albirar/albirar-root-dependencies</url>
+	<url>https://albirar.github.io/albirar-root-dependencies/</url>
 
 	<licenses>
 		<license>
@@ -25,6 +25,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/albirar/albirar-root-dependencies.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/albirar/albirar-root-dependencies.git</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/albirar/albirar-root-dependencies</url>
 	</scm>
@@ -38,13 +39,6 @@
 		<system>Github</system>
 		<url>https://github.com/albirar/albirar-root-dependencies/issues</url>
 	</issueManagement>
-
-	<distributionManagement>
-		<site>
-			<id>site_id</id>
-			<url>scm:git:ssh://git@github.com/albirar/albirar-root-dependencies.git</url>
-		</site>
-	</distributionManagement>
 
 	<developers>
 		<developer>
@@ -399,6 +393,9 @@
 							<version>1.7</version>
 						</dependency>
 					</dependencies>
+					<configuration>
+						<skipDeploy>true</skipDeploy>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -438,6 +435,14 @@
 					<configuration>
 						<scmBranch>gh-pages</scmBranch>
 					</configuration>
+					<executions>
+						<execution>
+							<phase>site-deploy</phase>
+							<goals>
+								<goal>publish-scm</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -546,6 +551,10 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
+		<site>
+			<id>site_github</id>
+			<url>scm:git:ssh://git@github.com/albirar/albirar-root-dependencies.git</url>
+		</site>
 	</distributionManagement>
 
 	<profiles>

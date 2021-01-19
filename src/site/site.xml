@@ -25,7 +25,6 @@
 			<bottomNav>
 				<column>Code</column>
 				<column>Releases</column>
-				<column>Icons</column>
 			</bottomNav>
 			<bottomDescription><![CDATA[
         Common dependencies and configuration for all Albirar projects
@@ -77,7 +76,7 @@
 
 	<body>
 		<head>
-			<![CDATA[<link rel="icon" type="image/png" href="img/logo-albirar-icon.png"></link>]]>
+			<![CDATA[<link rel="icon" type="image/png" href="images/logo-albirar-icon.png"></link>]]>
 		</head>
 		<menu name="Documentation" alt="Documentation" title="Documentation">
 			<item name="Git flow" href="git_flow.html" />
@@ -90,22 +89,19 @@
 			<item name="JavaDocs" href="apidocs/" />
 		</menu>
 		<menu name="Code" inherit="top" alt="Code" title="Code">
-			<item name="SCM" href="${project.scm.url}" alt="SCM" title="SCM" img="images/GitHub-Mark-32px.png">
+			<item name="Source Code" href="${project.scm.url}" alt="Github" title="Github" img="images/GitHub-Mark-32px.png">
 				<description>GitHub</description>
 			</item>
-			<item name="CI" href="${project.ciManagement.url}" alt="CI management" title="CI management">
+			<item name="CI" href="${project.ciManagement.url}" alt="${project.ciManagement.system}" title="${project.ciManagement.system}">
 				<description>${project.ciManagement.system}</description>
 			</item>
-			<item name="Issues" href="${project.issueManagement.url}" alt="Issue management" title="Issue management">
-				<description>${project.issueManagement.system}</description>
+			<item name="Issues" href="${project.issueManagement.url}" alt="${project.issueManagement.system} Issues" title="${project.issueManagement.system} Issues">
+				<description>${project.issueManagement.system} Issues</description>
 			</item>
 		</menu>
 		<menu name="Releases" inherit="top" alt="Releases" title="Releases">
 			<item name="Maven Central" alt="Maven Central" title="Maven Central"
 				href="https://search.maven.org/artifact/${project.groupId}/${project.artifactId}" />
-		</menu>
-		<menu name="Icons" inherit="top" alt="Icons" title="Icons">
-			<item name="Github" alt="Github" title="Github" img="images/GitHub-Mark-32px.png" href="${project.scm.url}" />
 		</menu>
 	</body>
 </project>
