@@ -78,30 +78,42 @@
 		<head>
 			<![CDATA[<link rel="icon" type="image/png" href="images/logo-albirar-icon.png"></link>]]>
 		</head>
-		<menu name="Documentation" alt="Documentation" title="Documentation">
+		<menu name="Documentation" alt="Documentation"
+			title="Documentation">
 			<item name="Git flow" href="git_flow.html" />
 			<item name="Maven Central (through nexus)" href="nexus.html" />
 			<item name="Project documentation" href="documentation.html" />
 		</menu>
-		<menu name="Info and Reports" inherit="top" alt="Info and Reports" title="Info and Reports">
+		<menu name="Info and Reports" inherit="top"
+			alt="Info and Reports" title="Info and Reports">
 			<item name="Info" href="project-info.html" />
 			<item name="Reports" href="project-reports.html" />
 			<item name="JavaDocs" href="apidocs/" />
 		</menu>
 		<menu name="Code" inherit="top" alt="Code" title="Code">
-			<item name="Source Code" href="${project.scm.url}" alt="Github" title="Github" img="images/GitHub-Mark-32px.png">
+			<item name="Source Code" href="${this.scm.url}" alt="Github"
+				title="Github" img="images/GitHub-Mark-32px.png">
 				<description>GitHub</description>
 			</item>
-			<item name="CI" href="${project.ciManagement.url}" alt="${project.ciManagement.system}" title="${project.ciManagement.system}">
-				<description>${project.ciManagement.system}</description>
+			<item name="CI" href="${this.ciManagement.url}"
+				alt="${this.ciManagement.system}"
+				title="${this.ciManagement.system}"
+				img="images/TravisCI-32px.png">
+				<description>${this.ciManagement.system}</description>
 			</item>
-			<item name="Issues" href="${project.issueManagement.url}" alt="${project.issueManagement.system} Issues" title="${project.issueManagement.system} Issues">
-				<description>${project.issueManagement.system} Issues</description>
+			<item name="Issues" href="${this.issueManagement.url}"
+				alt="${this.issueManagement.system} Issues"
+				title="${this.issueManagement.system} Issues"
+				img="images/Octocat-32px.png">
+				<description>${this.issueManagement.system} Issues</description>
 			</item>
 		</menu>
-		<menu name="Releases" inherit="top" alt="Releases" title="Releases">
-			<item name="Maven Central" alt="Maven Central" title="Maven Central"
-				href="https://search.maven.org/artifact/${project.groupId}/${project.artifactId}" />
+		<menu name="Releases" inherit="top" alt="Releases"
+			title="Releases">
+			<item name="Maven Central" alt="Maven Central"
+				title="Maven Central"
+				img="images/maven-logo-black-on-white-32px.png"
+				href="https://search.maven.org/artifact/${this.groupId}/${this.artifactId}" />
 		</menu>
 	</body>
 </project>
