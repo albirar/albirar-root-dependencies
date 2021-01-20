@@ -105,7 +105,7 @@ git push origin gh-pages
  </div> 
 </div>
 <p>Thats is all. Change to develop branch to create site</p>
-<section>        
+<section>           
 </section>
 		</div>
 	</div>
@@ -138,7 +138,34 @@ git push origin gh-pages
 </div>
 <p>At this point, content should to be added as needed by project.</p>
 <p>In order to help creation of <code>site.xml</code>, can use the template <a href="site_template.html">site.xml</a></p>
-<p>Also, the minimal resources set can be download from this project release at maven central: <a class="externalLink" href="https://search.maven.org/artifact/cat.albirar/albirar-root-dependencies-2.0.8-SNAPSHOT-assembly-resources.jar">https://search.maven.org/artifact/cat.albirar/albirar-root-dependencies-2.0.8-SNAPSHOT-assembly-resources.jar</a></p>
+<p>Also, the minimal resources set can be download from this project release at maven central: <a class="externalLink" href="https://search.maven.org/artifact/cat.albirar/albirar-root-dependencies-2.0.8-SNAPSHOT">https://search.maven.org/artifact/cat.albirar/albirar-root-dependencies-2.0.8-SNAPSHOT</a></p>
+<p>Or, if you want to automatically download and extract to generated site directory, put the following snippet at <code>build/plugins</code> sections on your <code>pom.xml</code>:</p>
+<div class="source"> 
+ <div class="source"> 
+  <pre>&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-remote-resources-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.7.0&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;resourceBundles&gt;
+      &lt;resourceBundle&gt;${project.parent.groupId}:${project.parent.artifactId}:${project.parent.version}:jar:assembly-resources&lt;/resourceBundle&gt;
+    &lt;/resourceBundles&gt;
+    &lt;outputDirectory&gt;${project.build.directory}/site&lt;/outputDirectory&gt;
+  &lt;/configuration&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;id&gt;obtain-resources&lt;/id&gt;
+      &lt;phase&gt;pre-site&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;process&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;
+</pre> 
+ </div> 
+</div>
+<p><b>ATENTION!!</b> Remember to use <code>mvn site</code> for site generation, and not <code>mvn site:site</code> because the first invoke the <code>pre-site</code> phase and the second doesn’t.</p>
 		</div>
 	</div>
 	<div class="row">
