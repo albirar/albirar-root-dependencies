@@ -7,7 +7,7 @@
 	<artifactId>albirar-root-dependencies</artifactId>
 	<version>2.0.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>albirar-root-dependencies</name>
+	<name>Albirar Root Dependencies</name>
 	<description>The common properties for dependencies on all albirar projects</description>
 	<url>https://albirar.github.io/albirar-root-dependencies/</url>
 
@@ -379,26 +379,6 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-remote-resources-plugin</artifactId>
-					<version>1.7.0</version>
-					<configuration>
-						<resourceBundles>
-							<resourceBundle>${project.parent.groupId}:${project.parent.artifactId}:${project.parent.version}:jar:assembly-resources</resourceBundle>
-						</resourceBundles>
-						<outputDirectory>${project.build.directory}/site</outputDirectory>
-					</configuration>
-					<executions>
-						<execution>
-							<id>obtain-resources</id>
-							<phase>pre-site</phase>
-							<goals>
-								<goal>process</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.9.1</version>
 					<dependencies>
@@ -474,20 +454,9 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		
+		<!-- This project execution -->
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>deploy-site-descriptor</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attach-descriptor</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-remote-resources-plugin</artifactId>
