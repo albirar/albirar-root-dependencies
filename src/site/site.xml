@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-	name="Albirar Root Dependencies">
+	name="${project.name}">
 	<publishDate position="bottom" format="dd-MM-yyy" />
 	<version position="bottom" />
 	<skin>
@@ -18,7 +18,7 @@
 			<highlightJs>true</highlightJs>
 			<skinAttribution>false</skinAttribution>
 			<brand>
-				<name>Albirar Root Dependencies</name>
+				<name>${project.name}</name>
 				<href>index.html</href>
 			</brand>
 			<topNav>Documentation|Info and Reports</topNav>
@@ -27,7 +27,7 @@
 				<column>Releases</column>
 			</bottomNav>
 			<bottomDescription><![CDATA[
-        Common dependencies and configuration for all Albirar projects
+			${project.description}
       ]]></bottomDescription>
 			<toc>false</toc>
 			<breadcrumbs>false</breadcrumbs>
@@ -88,7 +88,6 @@
 		<menu name="Info and Reports" alt="Info and Reports" title="Info and Reports">
 			<item name="Info" href="project-info.html" />
 			<item name="Reports" href="project-reports.html" />
-			<item name="JavaDocs" href="apidocs/" />
 		</menu>
 		<menu name="Code" alt="Code" title="Code">
 			<item name="Source Code" href="${project.scm.url}" alt="Github" title="Github" img="images/GitHub-Mark-32px.png">
@@ -107,8 +106,7 @@
 				<description>${project.issueManagement.system} Issues</description>
 			</item>
 		</menu>
-		<menu name="Releases" alt="Releases"
-			title="Releases">
+		<menu name="Releases" alt="Releases" title="Releases">
 			<item name="Maven Central" alt="Maven Central"
 				title="Maven Central"
 				img="images/maven-logo-black-on-white-32px.png"
