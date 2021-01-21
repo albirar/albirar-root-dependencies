@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.0.8</version>
+	<version>2.0.9</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -379,18 +379,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.9.1</version>
-					<dependencies>
-						<dependency>
-							<groupId>org.joda.external</groupId>
-							<artifactId>reflow-velocity-tools</artifactId>
-							<version>1.2</version>
-						</dependency>
-						<dependency>
-							<groupId>org.apache.velocity</groupId>
-							<artifactId>velocity</artifactId>
-							<version>1.7</version>
-						</dependency>
-					</dependencies>
 					<configuration>
 						<skipDeploy>true</skipDeploy>
 					</configuration>
