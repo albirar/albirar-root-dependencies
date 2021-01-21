@@ -1,8 +1,10 @@
 # albirar-root-dependencies
-The root properties, dependencies and builds for all projects.
+
+The common properties and dependencies for all Albirar projects
 
 ![Maven Central](https://img.shields.io/maven-central/v/cat.albirar/albirar-root-dependencies)
 
 ## Documentation
 
-See at 
+See at [https://albirar.github.io/albirar-root-dependencies/](https://albirar.github.io/albirar-root-dependencies/)
+

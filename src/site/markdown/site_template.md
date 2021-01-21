@@ -1,3 +1,8 @@
+# Site template
+
+Can copy and paste this site template, and personalize:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -13,7 +18,7 @@
 
 	<custom>
 		<reflowSkin>
-			<!-- Reflow configuration -->
+			<!-- Reflow configuration See http://andriusvelykis.github.io/reflow-maven-skin/skin/config.html -->
 			<theme>bootswatch-spruce</theme>
 			<highlightJs>true</highlightJs>
 			<skinAttribution>false</skinAttribution>
@@ -21,13 +26,13 @@
 				<name>${project.name}</name>
 				<href>index.html</href>
 			</brand>
-			<topNav>Documentation|Info and Reports</topNav>
+			<topNav>Info and Reports</topNav> <!-- Add other menu name here, with regex: Documentation|Info and Reports|Another menu... -->
 			<bottomNav>
 				<column>Code</column>
 				<column>Releases</column>
 			</bottomNav>
 			<bottomDescription><![CDATA[
-			${project.description}
+        ${project.description}
       ]]></bottomDescription>
 			<toc>false</toc>
 			<breadcrumbs>false</breadcrumbs>
@@ -36,40 +41,14 @@
 			<pages>
 				<index>
 					<sections>
-						<columns>1</columns>
+						<columns>2</columns>
 						<body />
 						<sidebar />
 					</sections>
 					<shortTitle>Home</shortTitle>
 					<highlightJs>true</highlightJs>
 				</index>
-				<git_flow>
-					<sections>
-						<columns>1</columns>
-						<body />
-						<sidebar />
-					</sections>
-					<shortTitle>Git Flow</shortTitle>
-					<highlightJs>true</highlightJs>
-				</git_flow>
-				<nexus>
-					<sections>
-						<columns>1</columns>
-						<body />
-						<sidebar />
-					</sections>
-					<shortTitle>Maven Central Publish</shortTitle>
-					<highlightJs>true</highlightJs>
-				</nexus>
-				<documentation>
-					<sections>
-						<columns>1</columns>
-						<body />
-						<sidebar />
-					</sections>
-					<shortTitle>Project site generation</shortTitle>
-					<highlightJs>true</highlightJs>
-				</documentation>
+				<!-- Other pages here: <page_name> <sections> ... </page_name> See http://andriusvelykis.github.io/reflow-maven-skin/skin/layouts.html -->
 			</pages>
 		</reflowSkin>
 	</custom>
@@ -78,25 +57,20 @@
 		<head>
 			<![CDATA[<link rel="icon" type="image/png" href="images/logo-albirar-icon.png"></link>]]>
 		</head>
-		<menu name="Documentation" alt="Documentation"
-			title="Documentation">
-			<item name="Git flow" href="git_flow.html" />
-			<item name="Maven Central (through nexus)" href="nexus.html" />
-			<item name="Project documentation" href="documentation.html" />
-			<item name="Template for site.xml" href="site_template.html" />
-		</menu>
-		<menu name="Info and Reports" alt="Info and Reports" title="Info and Reports">
+		<menu name="Info and Reports" inherit="top"
+			alt="Info and Reports" title="Info and Reports">
 			<item name="Info" href="project-info.html" />
 			<item name="Reports" href="project-reports.html" />
+			<item name="JavaDocs" href="apidocs/" />
 		</menu>
-		<menu name="Code" alt="Code" title="Code">
-			<item name="Source Code" href="${project.scm.url}" alt="Github" title="Github" img="images/GitHub-Mark-32px.png">
+		<menu name="Code" inherit="top" alt="Code" title="Code">
+			<item name="Source Code" href="${project.scm.url}" alt="Github"
+				title="Github" img="images/GitHub-Mark-32px.png">
 				<description>GitHub</description>
 			</item>
 			<item name="CI" href="${project.ciManagement.url}"
 				alt="${project.ciManagement.system}"
-				title="${project.ciManagement.system}"
-				img="images/TravisCI-32px.png">
+				title="${project.ciManagement.system}" img="images/TravisCI-32px.png">
 				<description>${project.ciManagement.system}</description>
 			</item>
 			<item name="Issues" href="${project.issueManagement.url}"
@@ -106,7 +80,8 @@
 				<description>${project.issueManagement.system} Issues</description>
 			</item>
 		</menu>
-		<menu name="Releases" alt="Releases" title="Releases">
+		<menu name="Releases" inherit="top" alt="Releases"
+			title="Releases">
 			<item name="Maven Central" alt="Maven Central"
 				title="Maven Central"
 				img="images/maven-logo-black-on-white-32px.png"
@@ -114,3 +89,4 @@
 		</menu>
 	</body>
 </project>
+```

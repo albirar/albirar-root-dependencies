@@ -5,8 +5,8 @@
 	<artifactId>albirar-root-dependencies</artifactId>
 	<version>2.0.8-RC3</version>
 	<packaging>pom</packaging>
-	<name>albirar-root-dependencies</name>
-	<description>The common properties for dependencies on all albirar projects</description>
+	<name>Albirar Root Dependencies</name>
+	<description>The common properties and dependencies for all Albirar projects</description>
 	<url>https://albirar.github.io/albirar-root-dependencies/</url>
 
 	<licenses>
@@ -378,7 +378,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
+					<version>3.9.1</version>
 					<dependencies>
 						<dependency>
 							<groupId>org.joda.external</groupId>
@@ -440,6 +440,8 @@
 					<version>3.1.0</version>
 					<configuration>
 						<scmBranch>gh-pages</scmBranch>
+						<!-- Need to configure in multi-module projects to ${project.build.directory}/staging -->
+						<content>${project.reporting.outputDirectory}</content>
 					</configuration>
 					<executions>
 						<execution>
@@ -452,19 +454,48 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<!-- This project execution -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>1.7.0</version>
+				<configuration>
+					<resourcesDirectory>src/site/resources</resourcesDirectory>
+					<includes>**/*</includes>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
 				<executions>
 					<execution>
-						<id>deploy-site-descriptor</id>
+						<id>bundle-resources</id>
 						<phase>package</phase>
 						<goals>
-							<goal>attach-descriptor</goal>
+							<goal>bundle</goal>
 						</goals>
 					</execution>
 				</executions>
+				<inherited>false</inherited>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/assembly/assembly-resources.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>package-resources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<inherited>false</inherited>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -473,6 +504,7 @@
 				<configuration>
 					<createChecksum>true</createChecksum>
 				</configuration>
+				<inherited>false</inherited>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -571,19 +603,6 @@
 					<plugins>
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-site-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>deploy-site-descriptor</id>
-									<phase>package</phase>
-									<goals>
-										<goal>attach-descriptor</goal>
-									</goals>
-								</execution>
-							</executions>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-gpg-plugin</artifactId>
 							<version>1.6</version>
 							<executions>
@@ -606,6 +625,7 @@
 								<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 								<skipStaging>true</skipStaging>
 								<stagingProfileId>${nexus.profileid}</stagingProfileId>
+								<autoReleaseAfterClose>true</autoReleaseAfterClose>
 							</configuration>
 							<executions>
 								<execution>
