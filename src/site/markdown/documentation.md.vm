@@ -1,0 +1,82 @@
+#[[
+# Project site documentation
+
+Any project that should to publish documentation, should to use the Maven site plugin.
+
+The site will be published with github pages, so as site is for project, the site is published at branch `gh-pages`.
+
+## Creating initial `gh-pages`
+
+You should to create the branch with git. The content of the new branch should to be only a empty file named `.nojekill`, that bypass use of `jekill` parser. No other contents should to be present in branch.
+
+At your folder local repository, without changes to commit, do:
+
+```bash
+git checkout --orphan gh-pages
+touch .nojekill
+git add .nojekill
+git commit -m "Site initial commit"
+git push origin gh-pages
+```
+Thats is all. Change to develop branch to create site
+
+## Site content
+
+At branches develop and main of project, but no gh-pages, should to add the site structure and content.
+
+The site folder structure is:
+
+```bash
++- src/
+|   +- site/
+|       +- markdown/
+|       |  +- index.md
+|       |  +- others_pages.md
+|       +- site.xml
+|       +- resources/
+|                +- css/
+|                |  +- ...
+|                |
+|                +- images/
+|                |  +- ...
+|                |
+|                +- js/
+|                |  +- ...
+|
+|   +- pom.xml
+```
+
+At this point, content should to be added as needed by project.
+
+In order to help creation of `site.xml`, can use the template [site.xml](site_template.html)
+
+Also, the minimal resources set can be download from this project release at maven central: 
+https://search.maven.org/artifact/]]#${project.groupId}/${project.artifactId}-${project.version}#[[
+
+Or, if you want to automatically download and extract to generated site directory, put the following snippet at `build/plugins` sections on your `pom.xml`:
+
+```xml
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-remote-resources-plugin</artifactId>
+  <version>1.7.0</version>
+  <configuration>
+    <resourceBundles>
+      <resourceBundle>${project.parent.groupId}:${project.parent.artifactId}:${project.parent.version}:jar:assembly-resources</resourceBundle>
+    </resourceBundles>
+    <outputDirectory>${project.build.directory}/site</outputDirectory>
+  </configuration>
+  <executions>
+    <execution>
+      <id>obtain-resources</id>
+      <phase>pre-site</phase>
+      <goals>
+        <goal>process</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+**ATENTION!!** Remember to use `mvn site` for site generation, and not `mvn site:site` because the first invoke the `pre-site` phase and the second doesn't.
+
+]]#

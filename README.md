@@ -1,9 +1,10 @@
 # albirar-root-dependencies
-The root properties, dependencies and builds for all projects
 
-## Workflow and Git
+The common properties and dependencies for all Albirar projects
 
-All [Albirar](https://albirar.cat albirar) projects uses the [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow "GitFlow workflow")
+![Maven Central](https://img.shields.io/maven-central/v/cat.albirar/albirar-root-dependencies)
 
-This parent pom includes a fully configured [jgit-flow-plugin](https://bitbucket.org/atlassian/jgit-flow/wiki/Home "jgit-flow plugin") to enforce the use of git workflow through maven.
+## Documentation
+
+See at [https://albirar.github.io/albirar-root-dependencies/](https://albirar.github.io/albirar-root-dependencies/)
 
