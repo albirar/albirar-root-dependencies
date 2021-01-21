@@ -5,7 +5,7 @@ Any project that should to publish documentation, should to use the Maven site p
 
 The site will be published with github pages, so as site is for project, the site is published at branch `gh-pages`.
 
-## Creating initial `gh-pages`
+## Creating initial **gh-pages**
 
 You should to create the branch with git. The content of the new branch should to be only a empty file named `.nojekill`, that bypass use of `jekill` parser. No other contents should to be present in branch.
 
