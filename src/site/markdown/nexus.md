@@ -2,7 +2,7 @@
 
 Nexus deploying enable disposing the projects at Maven Central. The pom contains all the needed to support this tasks.
 
-In all operations, the profile *nexus* should be used:
+<u>In all operations, the profile *nexus* should be used:</u>
 
 ```bash
 mvn -P nexus ...

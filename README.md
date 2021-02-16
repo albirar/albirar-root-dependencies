@@ -2,7 +2,11 @@
 
 The common properties and dependencies for all Albirar projects
 
-![Maven Central](https://img.shields.io/maven-central/v/cat.albirar/albirar-root-dependencies)
+| Service             | Status                                                       |
+| ------------------- | ------------------------------------------------------------ |
+| Travis-CI (master)  | ![Travis-CI](https://api.travis-ci.com/albirar/albirar-root-dependencies.svg?branch=master) |
+| Travis-CI (develop) | ![Travis-CI](https://api.travis-ci.com/albirar/albirar-root-dependencies.svg?branch=develop) |
+| Maven Central       | ![Maven Central](https://img.shields.io/maven-central/v/cat.albirar/albirar-root-dependencies) |
 
 ## Documentation
 

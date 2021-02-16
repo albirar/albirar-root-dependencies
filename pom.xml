@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.0.10</version>
+	<version>2.1.0</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -105,6 +107,7 @@
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
 
 		<jgitflow-plugin.version>1.0-m5.1</jgitflow-plugin.version>
+		<gitflow-plugin.version>1.15.1</gitflow-plugin.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -406,29 +409,20 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>external.atlassian.jgitflow</groupId>
-					<artifactId>jgitflow-maven-plugin</artifactId>
-					<version>${jgitflow-plugin.version}</version>
+					<groupId>com.amashchenko.maven.plugin</groupId>
+					<artifactId>gitflow-maven-plugin</artifactId>
+					<version>1.15.1</version>
 					<configuration>
-						<enableSshAgent>true</enableSshAgent>
-						<allowSnapshots>true</allowSnapshots>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<flowInitContext>
-							<masterBranchName>master</masterBranchName>
-							<developBranchName>develop</developBranchName>
-							<featureBranchPrefix>feature/</featureBranchPrefix>
-							<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
-							<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<gpgSignCommit>true</gpgSignCommit>
+						<gpgSignTag>true</gpgSignTag>
+						<installProject>true</installProject>
+						<useSnapshotInHotfix>true</useSnapshotInHotfix>
+						<useSnapshotInRelease>true</useSnapshotInRelease>
+						<gitFlowConfig>
 							<versionTagPrefix>v</versionTagPrefix>
-						</flowInitContext>
+						</gitFlowConfig>
+						<versionDigitToIncrement>1</versionDigitToIncrement>
 					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>com.jcraft</groupId>
-							<artifactId>jsch</artifactId>
-							<version>0.1.54</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
