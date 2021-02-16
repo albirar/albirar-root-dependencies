@@ -7,14 +7,14 @@ Can copy and paste this site template, and personalize:
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-	name="${name}">
-	<publishDate position="left" format="dd-MM-yyy" />
+	name="${this.name}">
+	<publishDate position="left" format="dd-MM-yyy HH:mm" />
 	<version position="left" />
 	
 	<bannerLeft>
 		<href>/</href>
-		<title>${name}</title>
-		<name>${name}</name>
+		<title>${this.name}</title>
+		<name>${this.name}</name>
 	</bannerLeft>
 	
 	<poweredBy>
@@ -34,42 +34,45 @@ Can copy and paste this site template, and personalize:
 		</fluidoSkin>
 	</custom>
 
-
 	<body>
 		<head>
 			<![CDATA[<link rel="icon" type="image/png" href="images/logo-albirar-icon.png"></link>]]>
 		</head>
-		<menu name="Documentation" title="Documentation">
-			<item name="Add to your project" href="dependency.html" />
-			<item name="Usage" href="usage.html" />
-			<item name="Github" href="${scm.url}"  />
+		<menu name="Documentation" alt="Documentation"
+			title="Documentation">
+			<item name="Git flow" href="git_flow.html" />
+			<item name="Maven Central (through nexus)" href="nexus.html" />
+			<item name="Project documentation" href="documentation.html" />
+			<item name="Template for site.xml" href="site_template.html" />
 		</menu>
-		<menu name="Info and Reports" title="Info and Reports">
+		<menu name="Info and Reports" alt="Info and Reports"
+			title="Info and Reports">
 			<item name="Info" href="project-info.html" />
 			<item name="Reports" href="project-reports.html" />
-			<item name="JavaDocs" href="apidocs" />
 		</menu>
-		<menu name="Code" title="Code">
-			<item name="Source code" href="${scm.url}"
-				title="${scm.system}"
-				img="images/GitHub-Mark-32px.png">
-				<description>${scm.system}</description>
+		<menu name="Code" alt="Code" title="Code">
+			<item name="Source Code" href="${this.scm.url}" alt="Github"
+				title="Github" img="images/GitHub-Mark-32px.png">
+				<description>GitHub</description>
 			</item>
-			<item name="CI" href="${ciManagement.url}"
-				title="${ciManagement.system}"
+			<item name="CI" href="${this.ciManagement.url}"
+				alt="${this.ciManagement.system}"
+				title="${this.ciManagement.system}"
 				img="images/TravisCI-32px.png">
-				<description>${ciManagement.system}</description>
+				<description>${this.ciManagement.system}</description>
 			</item>
-			<item name="Issues" href="${issueManagement.url}"
-				title="${issueManagement.system} Issues"
+			<item name="Issues" href="${this.issueManagement.url}"
+				alt="${this.issueManagement.system} Issues"
+				title="${this.issueManagement.system} Issues"
 				img="images/Octocat-32px.png">
-				<description>${issueManagement.system} Issues</description>
+				<description>${this.issueManagement.system} Issues</description>
 			</item>
 		</menu>
-		<menu name="Releases" title="Releases">
-			<item name="Maven Central" title="Maven Central"
+		<menu name="Releases" alt="Releases" title="Releases">
+			<item name="Maven Central" alt="Maven Central"
+				title="Maven Central"
 				img="images/maven-logo-black-on-white-32px.png"
-				href="https://search.maven.org/artifact/${groupId}/${artifactId}" />
+				href="https://search.maven.org/artifact/${this.groupId}/${this.artifactId}" />
 		</menu>
 	</body>
 </project>
