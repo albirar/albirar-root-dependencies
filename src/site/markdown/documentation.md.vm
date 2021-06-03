@@ -51,7 +51,7 @@ At this point, content should to be added as needed by project.
 In order to help creation of `site.xml`, can use the template [site.xml](site_template.html)
 
 Also, the minimal resources set can be download from this project release at maven central: 
-https://search.maven.org/artifact/]]#${project.groupId}/${project.artifactId}-${project.version}#[[
+https://search.maven.org/artifact/]]#${project.groupId}/${project.artifactId}#[[
 
 Or, if you want to automatically download and extract to generated site directory, put the following snippet at `build/plugins` sections on your `pom.xml`:
 
