@@ -110,6 +110,7 @@
 		<gitflow-plugin.version>1.15.1</gitflow-plugin.version>
 
 		<adoc-plugin.version>2.1.0</adoc-plugin.version>
+		<asciidoctorj.version>2.5.1</asciidoctorj.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -278,6 +279,11 @@
 							<artifactId>spring-restdocs-asciidoctor</artifactId>
 							<version>${spring-restdocs.version}</version>
 						</dependency>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj</artifactId>
+							<version>${asciidoctorj.version}</version>
+						</dependency>
 					</dependencies>
 				</plugin>
 				<plugin>
@@ -401,6 +407,12 @@
 					</dependencies>
 					<configuration>
 						<skipDeploy>true</skipDeploy>
+						<asciidoc>
+							<attributes>
+								<source-highlighter>coderay</source-highlighter>
+								<coderay-css>style</coderay-css>
+							</attributes>
+						</asciidoc>
 					</configuration>
 				</plugin>
 				<plugin>
