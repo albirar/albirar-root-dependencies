@@ -54,6 +54,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 
 		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
 		<spring-data-mongodb.version>2.2.7.RELEASE</spring-data-mongodb.version>
@@ -106,8 +107,7 @@
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
 
-		<jgitflow-plugin.version>1.0-m5.1</jgitflow-plugin.version>
-		<gitflow-plugin.version>1.15.1</gitflow-plugin.version>
+		<gitflow-plugin.version>1.16.0</gitflow-plugin.version>
 
 		<adoc-plugin.version>2.1.0</adoc-plugin.version>
 		<asciidoctorj.version>2.5.1</asciidoctorj.version>
@@ -410,9 +410,13 @@
 						<skipDeploy>true</skipDeploy>
 						<asciidoc>
 							<attributes>
-								<source-highlighter>coderay</source-highlighter>
-								<coderay-css>style</coderay-css>
+								<source-highlighter>rouge</source-highlighter>
 								<icons>font</icons>
+								<project-group-id>${project.groupId}</project-group-id>
+								<project-artifact-id>${project.artifactId}</project-artifact-id>
+								<project-version>${project.version}</project-version>
+								<revnumber>${project.version}</revnumber>
+								<revdate>${maven.build.timestamp}</revdate>
 							</attributes>
 						</asciidoc>
 					</configuration>
