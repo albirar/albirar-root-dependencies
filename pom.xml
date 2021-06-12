@@ -410,7 +410,8 @@
 						<skipDeploy>true</skipDeploy>
 						<asciidoc>
 							<attributes>
-								<source-highlighter>rouge</source-highlighter>
+								<source-highlighter>coderay</source-highlighter>
+								<coderay-css>class</coderay-css>
 								<icons>font</icons>
 								<project-group-id>${project.groupId}</project-group-id>
 								<project-artifact-id>${project.artifactId}</project-artifact-id>
