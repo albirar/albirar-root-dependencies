@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.2.0</version>
+	<version>2.3.0</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -80,7 +80,7 @@
 
 		<lombok.version>1.18.12</lombok.version>
 
-		<hibernate-validator.version>6.0.18.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.0.20.Final</hibernate-validator.version>
 		<javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
@@ -110,6 +110,7 @@
 		<gitflow-plugin.version>1.15.1</gitflow-plugin.version>
 
 		<adoc-plugin.version>2.1.0</adoc-plugin.version>
+		<asciidoctorj.version>2.5.1</asciidoctorj.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -194,6 +195,7 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
@@ -277,6 +279,11 @@
 							<groupId>org.springframework.restdocs</groupId>
 							<artifactId>spring-restdocs-asciidoctor</artifactId>
 							<version>${spring-restdocs.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoctorj</artifactId>
+							<version>${asciidoctorj.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -401,6 +408,13 @@
 					</dependencies>
 					<configuration>
 						<skipDeploy>true</skipDeploy>
+						<asciidoc>
+							<attributes>
+								<source-highlighter>coderay</source-highlighter>
+								<coderay-css>style</coderay-css>
+								<icons>font</icons>
+							</attributes>
+						</asciidoc>
 					</configuration>
 				</plugin>
 				<plugin>
