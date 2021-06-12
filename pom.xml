@@ -412,6 +412,7 @@
 							<attributes>
 								<source-highlighter>coderay</source-highlighter>
 								<coderay-css>style</coderay-css>
+								<icons>font</icons>
 							</attributes>
 						</asciidoc>
 					</configuration>
