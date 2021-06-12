@@ -79,4 +79,14 @@ Or, if you want to automatically download and extract to generated site director
 ```
 **ATENTION!!** Remember to use `mvn site` for site generation, and not `mvn site:site` because the first invoke the `pre-site` phase and the second doesn't.
 
+## Site deploy
+
+In order to deploy your site documentation, should to use the plugin scm-publish:
+
+```bash
+mvn clean site scm-publish
+```
+**ATENTION!!** Remember to create [the initial pages](#Creating_initial_gh-pages) before use the publish command!
+
+
 ]]#
