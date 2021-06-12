@@ -1,32 +1,41 @@
 #[[
-# Project site documentation
+= Project site documentation
+
+Octavi Fornés <ofornes@albirar.cat>
+
+:doctype: article
+:encoding: utf-8
+:lang: en
 
 Any project that should to publish documentation, should to use the Maven site plugin.
 
 The site will be published with github pages, so as site is for project, the site is published at branch `gh-pages`.
 
-## Creating initial **gh-pages**
+== Creating initial **gh-pages**
 
 You should to create the branch with git. The content of the new branch should to be only a empty file named `.nojekill`, that bypass use of `jekill` parser. No other contents should to be present in branch.
 
 At your folder local repository, without changes to commit, do:
 
-```bash
+[source, bash]
+----
 git checkout --orphan gh-pages
 touch .nojekill
 git add .nojekill
 git commit -m "Site initial commit"
 git push origin gh-pages
-```
+----
+
 Thats is all. Change to develop branch to create site
 
-## Site content
+== Site content
 
 At branches develop and main of project, but no gh-pages, should to add the site structure and content.
 
 The site folder structure is:
 
-```bash
+[source, bash]
+----
 +- src/
 |   +- site/
 |       +- markdown/
@@ -44,18 +53,19 @@ The site folder structure is:
 |                |  +- ...
 |
 |   +- pom.xml
-```
+----
 
 At this point, content should to be added as needed by project.
 
-In order to help creation of `site.xml`, can use the template [site.xml](site_template.html)
+In order to help creation of `site.xml`, can use the template site_template.html[site.xml]
 
 Also, the minimal resources set can be download from this project release at maven central: 
 https://search.maven.org/artifact/]]#${project.groupId}/${project.artifactId}#[[
 
 Or, if you want to automatically download and extract to generated site directory, put the following snippet at `build/plugins` sections on your `pom.xml`:
 
-```xml
+[source, xml]
+----
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-remote-resources-plugin</artifactId>
@@ -76,17 +86,26 @@ Or, if you want to automatically download and extract to generated site director
     </execution>
   </executions>
 </plugin>
-```
-**ATENTION!!** Remember to use `mvn site` for site generation, and not `mvn site:site` because the first invoke the `pre-site` phase and the second doesn't.
+----
 
-## Site deploy
+[WARNING]
+====
+Remember to use `mvn site` for site generation, and not `mvn site:site` because the first invoke the `pre-site` phase and the second doesn't.
+====
+
+
+== Site deploy
 
 In order to deploy your site documentation, should to use the plugin scm-publish:
 
-```bash
-mvn clean site scm-publish
-```
-**ATENTION!!** Remember to create [the initial pages](#Creating_initial_gh-pages) before use the publish command!
+[source, bash]
+----
+mvn clean site scm-publish:publish-scm
+----
+[WARNING]
+====
+Remember to create <<creating_initial_gh_pages,the initial pages>> before use the publish command!
+====
 
 
 ]]#
