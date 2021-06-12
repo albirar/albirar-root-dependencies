@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.4.0</version>
+	<version>2.4.1</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -410,7 +410,8 @@
 						<skipDeploy>true</skipDeploy>
 						<asciidoc>
 							<attributes>
-								<source-highlighter>rouge</source-highlighter>
+								<source-highlighter>coderay</source-highlighter>
+								<coderay-css>class</coderay-css>
 								<icons>font</icons>
 								<project-group-id>${project.groupId}</project-group-id>
 								<project-artifact-id>${project.artifactId}</project-artifact-id>

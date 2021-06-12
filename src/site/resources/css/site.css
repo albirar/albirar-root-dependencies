@@ -1,4 +1,5 @@
-@import "github.css";
+@import "coderay.css"; /* syntax coderay */
+@import "github.css"; /* syntax rouge and pygment */
 
 :root {
     --color-brand-primary: #e40046;
