@@ -57,6 +57,7 @@
 		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 
 		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+		<spring-boot-configuration-processor.version>2.3.12.RELEASE</spring-boot-configuration-processor.version>
 		<spring-data-mongodb.version>2.2.7.RELEASE</spring-data-mongodb.version>
 		<spring-data.version>2.3.0.RELEASE</spring-data.version>
 		<spring-restdocs.version>2.0.4.RELEASE</spring-restdocs.version>
