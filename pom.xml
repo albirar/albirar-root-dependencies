@@ -104,6 +104,7 @@
 		<mockserver.version>5.11.1</mockserver.version>
 		<awaitility.version>4.0.3</awaitility.version>
 		<cobertura.version>2.7</cobertura.version>
+		<jacoco.version>0.8.7</jacoco.version>
 
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
@@ -112,6 +113,7 @@
 
 		<adoc-plugin.version>2.1.0</adoc-plugin.version>
 		<asciidoctorj.version>2.5.1</asciidoctorj.version>
+		<asciidoclet.version>1.5.6</asciidoclet.version>
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -343,12 +345,31 @@
 					<version>3.2.0</version>
 					<executions>
 						<execution>
-							<id>attach-javadoc</id>
+							<id>attach-docs</id>
+							<phase>package</phase>
 							<goals>
 								<goal>jar</goal>
+								<goal>test-jar</goal>
 							</goals>
 						</execution>
 					</executions>
+					<configuration>
+						<detectLinks>true</detectLinks>
+						<detectJavaApiLink>true</detectJavaApiLink>
+						<source>1.8</source>
+						<doclet>org.asciidoctor.Asciidoclet</doclet>
+						<docletArtifact>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoclet</artifactId>
+							<version>1.5.4</version>
+						</docletArtifact>
+						<additionalOptions>
+							--base-dir ${project.basedir}
+							--attribute
+							"name=${project.name}"
+							--attribute "version=${project.version}"
+						</additionalOptions>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -396,6 +417,61 @@
 						</formats>
 					</configuration>
 				</plugin>
+
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to the file which contains the execution data. -->
+								<dataFile>target/jacoco.exec</dataFile>
+								<!-- Sets the output directory for the code coverage report. -->
+								<outputDirectory>target/jacoco-ut</outputDirectory>
+							</configuration>
+						</execution>
+						<execution>
+							<id>jacoco-check</id>
+							<goals>
+								<goal>check</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<rule>
+										<element>PACKAGE</element>
+										<limits>
+											<limit>
+												<counter>LINE</counter>
+												<value>COVEREDRATIO</value>
+												<minimum>0.50</minimum>
+											</limit>
+										</limits>
+									</rule>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
@@ -551,6 +627,18 @@
 				</reportSets>
 			</plugin>
 			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
 				<version>2.12.1</version>
@@ -591,10 +679,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<detectLinks>true</detectLinks>
-				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
