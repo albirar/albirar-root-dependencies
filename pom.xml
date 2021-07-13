@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.4.1</version>
+	<version>2.5.0</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -57,6 +57,7 @@
 		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 
 		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+		<spring-boot-configuration-processor.version>2.3.12.RELEASE</spring-boot-configuration-processor.version>
 		<spring-data-mongodb.version>2.2.7.RELEASE</spring-data-mongodb.version>
 		<spring-data.version>2.3.0.RELEASE</spring-data.version>
 		<spring-restdocs.version>2.0.4.RELEASE</spring-restdocs.version>
@@ -102,7 +103,7 @@
 		<mockito.version>3.1.0</mockito.version>
 		<mockserver.version>5.11.1</mockserver.version>
 		<awaitility.version>4.0.3</awaitility.version>
-		<cobertura.version>2.7</cobertura.version>
+		<jacoco.version>0.8.7</jacoco.version>
 
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
@@ -111,6 +112,13 @@
 
 		<adoc-plugin.version>2.1.0</adoc-plugin.version>
 		<asciidoctorj.version>2.5.1</asciidoctorj.version>
+		<asciidoclet.version>1.5.6</asciidoclet.version>
+
+		<!-- sonarqube -->
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>albirar</sonar.organization>
+		<sonar.coverage.jacoco.xmlReportPaths>${jacoco.outputDirectory}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<!-- Each project should to assign their own 'sonar.projectKey' -->
 	</properties>
 
 	<!-- COMMON DEPENDENCIES -->
@@ -288,6 +296,20 @@
 					</dependencies>
 				</plugin>
 				<plugin>
+					<groupId>net.nicoulaj.maven.plugins</groupId>
+					<artifactId>checksum-maven-plugin</artifactId>
+					<version>1.9</version>
+					<executions>
+						<execution>
+							<id>generate-checksums</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>artifacts</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<groupId>org.projectlombok</groupId>
 					<artifactId>lombok-maven-plugin</artifactId>
 					<version>${lombok.version}.0</version>
@@ -304,6 +326,26 @@
 							<phase>generate-test-sources</phase>
 							<goals>
 								<goal>testDelombok</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-remote-resources-plugin</artifactId>
+					<version>1.7.0</version>
+					<configuration>
+						<resourceBundles>
+							<resourceBundle>${project.parent.groupId}:${project.parent.artifactId}:${project.parent.version}:jar:assembly-resources</resourceBundle>
+						</resourceBundles>
+						<outputDirectory>${project.build.directory}/site</outputDirectory>
+					</configuration>
+					<executions>
+						<execution>
+							<id>obtain-resources</id>
+							<phase>pre-site</phase>
+							<goals>
+								<goal>process</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -342,12 +384,31 @@
 					<version>3.2.0</version>
 					<executions>
 						<execution>
-							<id>attach-javadoc</id>
+							<id>attach-docs</id>
+							<phase>package</phase>
 							<goals>
 								<goal>jar</goal>
+								<goal>test-jar</goal>
 							</goals>
 						</execution>
 					</executions>
+					<configuration>
+						<detectLinks>true</detectLinks>
+						<detectJavaApiLink>true</detectJavaApiLink>
+						<source>1.8</source>
+						<doclet>org.asciidoctor.Asciidoclet</doclet>
+						<docletArtifact>
+							<groupId>org.asciidoctor</groupId>
+							<artifactId>asciidoclet</artifactId>
+							<version>1.5.4</version>
+						</docletArtifact>
+						<additionalOptions>
+							--base-dir ${project.basedir}
+							--attribute
+							"name=${project.name}"
+							--attribute "version=${project.version}"
+						</additionalOptions>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -369,32 +430,32 @@
 					<version>${spring-boot.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>${cobertura.version}</version>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+					<configuration>
+						<!-- Sets the path to the file which contains the execution data. -->
+						<dataFile>target/jacoco.exec</dataFile>
+						<!-- Sets the output directory for the code coverage report. -->
+						<outputDirectory>target/jacoco-ut</outputDirectory>
+					</configuration>
 					<executions>
 						<execution>
-							<id>site-cobertura</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
 							<phase>pre-site</phase>
 							<goals>
-								<goal>cobertura</goal>
+								<goal>report</goal>
 							</goals>
-							<inherited>true</inherited>
 						</execution>
 					</executions>
-					<configuration>
-						<instrumentation>
-							<excludes>
-								<exclude>**/models/*.class</exclude>
-								<exclude>**/I*.class</exclude>
-							</excludes>
-						</instrumentation>
-						<formats>
-							<format>html</format>
-							<format>xml</format>
-						</formats>
-					</configuration>
 				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
@@ -478,7 +539,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-remote-resources-plugin</artifactId>
-				<version>1.7.0</version>
 				<configuration>
 					<resourcesDirectory>src/site/resources</resourcesDirectory>
 					<includes>**/*</includes>
@@ -519,9 +579,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>3.0.0-M1</version>
-				<configuration>
-					<createChecksum>true</createChecksum>
-				</configuration>
 				<inherited>false</inherited>
 			</plugin>
 			<plugin>
@@ -538,13 +595,12 @@
 	<reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura.version}</version>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>cobertura</report>
+							<report>report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -585,15 +641,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<detectLinks>true</detectLinks>
-				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
