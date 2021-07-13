@@ -117,6 +117,7 @@
 		<!-- sonarqube -->
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>albirar</sonar.organization>
+		<sonar.coverage.jacoco.xmlReportPaths>${jacoco.outputDirectory}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 		<!-- Each project should to assign their own 'sonar.projectKey' -->
 	</properties>
 
