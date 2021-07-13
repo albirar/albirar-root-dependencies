@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cat.albirar</groupId>
 	<artifactId>albirar-root-dependencies</artifactId>
-	<version>2.5.0</version>
+	<version>2.5.1</version>
 	<packaging>pom</packaging>
 	<name>Albirar Root Dependencies</name>
 	<description>The common properties and dependencies for all Albirar projects</description>
@@ -56,7 +56,7 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 
-		<spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+		<spring-boot.version>2.3.12.RELEASE</spring-boot.version>
 		<spring-boot-configuration-processor.version>2.3.12.RELEASE</spring-boot-configuration-processor.version>
 		<spring-data-mongodb.version>2.2.7.RELEASE</spring-data-mongodb.version>
 		<spring-data.version>2.3.0.RELEASE</spring-data.version>
@@ -67,7 +67,7 @@
 		<spring-test-mysql.version>0.2</spring-test-mysql.version>
 		<spring-test-postgresql.version>0.2</spring-test-postgresql.version>
 		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
-		<spring.version>5.2.12.RELEASE</spring.version>
+		<spring.version>5.2.15.RELEASE</spring.version>
 		<spring-amqp.version>2.2.7.RELEASE</spring-amqp.version>
 		<spring-webflux.version>2.3.1.RELEASE</spring-webflux.version>
 
