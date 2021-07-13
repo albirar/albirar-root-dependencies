@@ -103,7 +103,6 @@
 		<mockito.version>3.1.0</mockito.version>
 		<mockserver.version>5.11.1</mockserver.version>
 		<awaitility.version>4.0.3</awaitility.version>
-		<cobertura.version>2.7</cobertura.version>
 		<jacoco.version>0.8.7</jacoco.version>
 
 		<jms-api.version>2.0.1</jms-api.version>
@@ -433,9 +432,15 @@
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>${jacoco.version}</version>
+					<configuration>
+						<!-- Sets the path to the file which contains the execution data. -->
+						<dataFile>target/jacoco.exec</dataFile>
+						<!-- Sets the output directory for the code coverage report. -->
+						<outputDirectory>target/jacoco-ut</outputDirectory>
+					</configuration>
 					<executions>
 						<execution>
-							<id>prepare-agent</id>
+							<phase>test-compile</phase>
 							<goals>
 								<goal>prepare-agent</goal>
 							</goals>
@@ -446,39 +451,6 @@
 							<goals>
 								<goal>report</goal>
 							</goals>
-						</execution>
-						<execution>
-							<id>post-unit-test</id>
-							<phase>test</phase>
-							<goals>
-								<goal>report</goal>
-							</goals>
-							<configuration>
-								<!-- Sets the path to the file which contains the execution data. -->
-								<dataFile>target/jacoco.exec</dataFile>
-								<!-- Sets the output directory for the code coverage report. -->
-								<outputDirectory>target/jacoco-ut</outputDirectory>
-							</configuration>
-						</execution>
-						<execution>
-							<id>jacoco-check</id>
-							<goals>
-								<goal>check</goal>
-							</goals>
-							<configuration>
-								<rules>
-									<rule>
-										<element>PACKAGE</element>
-										<limits>
-											<limit>
-												<counter>LINE</counter>
-												<value>COVEREDRATIO</value>
-												<minimum>0.50</minimum>
-											</limit>
-										</limits>
-									</rule>
-								</rules>
-							</configuration>
 						</execution>
 					</executions>
 				</plugin>
@@ -622,25 +594,12 @@
 	<reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura.version}</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>cobertura</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>report-aggregate</report>
+							<report>report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -681,7 +640,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
