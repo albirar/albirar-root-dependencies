@@ -104,6 +104,7 @@
 		<mockserver.version>5.11.1</mockserver.version>
 		<awaitility.version>4.0.3</awaitility.version>
 		<jacoco.version>0.8.7</jacoco.version>
+		<jacoco.outputDirectory>${project.build.directory}/jacoco-ut</jacoco.outputDirectory>
 
 		<jms-api.version>2.0.1</jms-api.version>
 		<rabbitmq-container.version>1.14.3</rabbitmq-container.version>
@@ -437,7 +438,7 @@
 						<!-- Sets the path to the file which contains the execution data. -->
 						<dataFile>target/jacoco.exec</dataFile>
 						<!-- Sets the output directory for the code coverage report. -->
-						<outputDirectory>target/jacoco-ut</outputDirectory>
+						<outputDirectory>${jacoco.outputDirectory}</outputDirectory>
 					</configuration>
 					<executions>
 						<execution>
