@@ -67,7 +67,7 @@
 		<spring-test-mysql.version>0.2</spring-test-mysql.version>
 		<spring-test-postgresql.version>0.2</spring-test-postgresql.version>
 		<spring-thymeleaf.version>3.0.11.RELEASE</spring-thymeleaf.version>
-		<spring.version>5.2.15.RELEASE</spring.version>
+		<spring.version>5.3.27</spring.version>
 		<spring-amqp.version>2.2.7.RELEASE</spring-amqp.version>
 		<spring-webflux.version>2.3.1.RELEASE</spring-webflux.version>
 
