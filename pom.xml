@@ -86,7 +86,7 @@
 		<javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
 		<jakarta.validation-api.version>2.0.2</jakarta.validation-api.version>
 
-		<tomcat-embed-el.version>9.0.33</tomcat-embed-el.version>
+		<tomcat-embed-el.version>9.0.74</tomcat-embed-el.version>
 		<jackson.version>2.10.3</jackson.version>
 		<jwt.version>0.11.1</jwt.version>
 
